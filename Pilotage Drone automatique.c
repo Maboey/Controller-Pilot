@@ -189,19 +189,19 @@ void main ()
 			// on met à jour la valeur des boutons des joysticks et du pwm
 			if(joystick_Gauche_Click)
 			{
-				P0 = (pwm |= 0x10);
+				P0 = (pwm |= 0x10); // 0001 0000
 			}
 			else
 			{
-				P0 = (pwm &= 0xEF);
+				P0 = (pwm &= 0xEF); // 1110 1111
 			}
 			if(joystick_Droite_Click)
 			{
-				P0 = (pwm |= 0x20);
+				P0 = (pwm |= 0x20); // 0010 0000
 			}
 			else
 			{
-				P0 = (pwm &= 0xDF);
+				P0 = (pwm &= 0xDF); // 1101 1111
 			}
 			
 		}
