@@ -1,5 +1,5 @@
 /*===========================================================================*=
-   CFPT - Projet : Pilotage Drone automatique
+   CFPT - Projet : Pilotage manette
    Auteur        : Martin Manuel
    Date creation : 29.02.20
   =============================================================================
@@ -19,7 +19,7 @@ void PortInit ();       // init. config des ports
 void TimerInit ();	   	// init. timers
 
 // direction joysticks
-void JoystickDirection (unsigned char gauche, unsigned char droite); 
+void Joystick (unsigned char gauche, unsigned char droite); 
 
 // ==== Fonctions prototypes ==================================================
 #define LOADVALUE 20
@@ -31,13 +31,18 @@ void JoystickDirection (unsigned char gauche, unsigned char droite);
 #define DROITE 3
 #define CALIBRATION 4
 #define REPOS	5
+#define CLICKON 6
+#define CLICKOFF 7
 
 // ==== Variables Globales ====================================================
 bit flagTimer = 0;
 
-//--------- x% Potentiometres Joysticks --------------
+//--------- x% Joysticks Potentiometres --------------
 unsigned char Joystick_Gauche_Vertical = 50, Joystick_Gauche_Horizontal = 50,
 	Joystick_Droite_Vertical = 50, Joystick_Droite_Horizontal = 10;
+
+//------------- Joysticks Buttons ------------------
+bit joystick_Gauche_Click = 0, joystick_Droite_Click = 0;
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /*                                  MAIN                                       */
@@ -59,6 +64,8 @@ void main ()
 												 //			 |||+- PWM Joystick Droite Horizontal
 												 //			 ||||
 	unsigned char pwm = 0; // xxxx xxxx 4 PWM
+
+
 	
 	//--- Initialisation uC-----------------------------------------------------
 	PCA0MD &= ~0x40;     // WDTE = 0 (disable watchdog timer)
@@ -76,29 +83,37 @@ void main ()
 			switch (compteurAction)
       {
 				// test
-				case 0 : JoystickDirection (HAUT,HAUT);
+				case 0 : Joystick (HAUT,HAUT);
       		break;
-      	case 1 : JoystickDirection (BAS,BAS);
+      	case 1 : Joystick (BAS,BAS);
       		break;
-      	case 2 : JoystickDirection (GAUCHE,GAUCHE);
+      	case 2 : Joystick (GAUCHE,GAUCHE);
       		break;
-				case 3 : JoystickDirection (DROITE,DROITE);
+				case 3 : Joystick (DROITE,DROITE);
       		break;
-				case 4 : JoystickDirection (REPOS,REPOS);
+				case 4 : Joystick (REPOS,REPOS);
       		break;
-      	case 5 : JoystickDirection (CALIBRATION,CALIBRATION);
+      	case 5 : Joystick (CALIBRATION,CALIBRATION);
       		break;
-				case 6 : compteurAction = 0;
+				case 6 : Joystick (CLICKON,CLICKON);
+      		break;
+				case 7 : Joystick (CLICKOFF,CLICKOFF);
+      		break;
+				case 8 : compteurAction = 0;
       		break;
 				
 				/* // Demarrage drone
-      	case 0 : JoystickDirection (HAUT,REPOS);
+      	case 0 : Joystick (HAUT,REPOS);
       		break;
-      	case 1 : JoystickDirection (BAS,REPOS);
+      	case 1 : Joystick (BAS,REPOS);
       		break;
-      	case 2 : JoystickDirection (CALIBRATION,CALIBRATION);
+      	case 2 : Joystick (CALIBRATION,CALIBRATION);
       		break;
-				case 3 : run = 0; // met fin au programme après toutes les actions
+				case 3 : Joystick (CLICKON,REPOS); // décollage drone
+      		break;
+				case 4 : Joystick (CLICKOFF,REPOS); 
+      		break;
+				case 5 : run = 0; // met fin au programme après toutes les actions
       		break;*/
       }
 			compteurAction ++;
@@ -170,8 +185,24 @@ void main ()
 				pwm &= 0xFE; //PWM Joystick Gauche Vertical force a 0
 			}
 			
-			// on met à jour les sorties PWM
-			P0 = pwm;
+			
+			// on met à jour la valeur des boutons des joysticks et du pwm
+			if(joystick_Gauche_Click)
+			{
+				P0 = (pwm |= 0x10);
+			}
+			else
+			{
+				P0 = (pwm &= 0xEF);
+			}
+			if(joystick_Droite_Click)
+			{
+				P0 = (pwm |= 0x20);
+			}
+			else
+			{
+				P0 = (pwm &= 0xDF);
+			}
 			
 		}
 		
@@ -181,14 +212,14 @@ void main ()
 
 
 /*---------------------------------------------------------------------------*-
-   JoystickDirection ()
+   Joystick ()
   -----------------------------------------------------------------------------
-   Descriptif: 
-   Entree    : gauche (HAUT,BAS,GAUCHE,DROITE,CALIBRATIONDRONE)
-							 droite (HAUT,BAS,GAUCHE,DROITE,CALIBRATIONDRONE)
+   Descriptif: fonction simulant le fonctionnement de deux joysticks
+   Entree    : gauche (HAUT,BAS,GAUCHE,DROITE,CALIBRATIONDRONE,CLICKON,CLICKOFF)
+							 droite (HAUT,BAS,GAUCHE,DROITE,CALIBRATIONDRONE,CLICKON,CLICKOFF)
    Sortie    : --
 -*---------------------------------------------------------------------------*/
-void JoystickDirection (unsigned char gauche, unsigned char droite)
+void Joystick (unsigned char gauche, unsigned char droite)
 {
 	switch (gauche)
   {
@@ -204,6 +235,10 @@ void JoystickDirection (unsigned char gauche, unsigned char droite)
   		break;
 		case REPOS : Joystick_Gauche_Horizontal = 50; Joystick_Gauche_Vertical = 50;
   		break;
+		case CLICKON : joystick_Gauche_Click = 1;
+  		break;
+		case CLICKOFF : joystick_Gauche_Click = 0;
+  		break;
   }
 	switch (droite)
   {
@@ -218,6 +253,10 @@ void JoystickDirection (unsigned char gauche, unsigned char droite)
 		case CALIBRATION : Joystick_Droite_Horizontal = 0; Joystick_Droite_Vertical = 0;
   		break;
 		case REPOS : Joystick_Droite_Horizontal = 50; Joystick_Droite_Vertical = 50;
+  		break;
+		case CLICKON : joystick_Droite_Click = 1;
+  		break;
+		case CLICKOFF : joystick_Droite_Click = 0;
   		break;
   }
 }
@@ -346,7 +385,7 @@ void ClockInit()
 -*---------------------------------------------------------------------------*/
 void PortInit () 
 {
-   P0MDOUT = 0xFF;      // port P1 en sortie num�rique (push-pull)
+   P0MDOUT = 0xFF;      // port P0 en sortie numerique (push-pull)
    XBR1   |= 0x40;      // autorise le fonctionnement du crossbar
 
 }// PortInit ----------------------------------------------------------------

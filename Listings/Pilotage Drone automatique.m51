@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/29/2020  19:22:33  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    03/06/2020  20:38:58  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -26,9 +26,9 @@ LINK MAP OF MODULE:  .\Objects\Pilotage Drone automatique (PILOTAGE_DRONE_AUTOMA
             DATA    0008H     0006H     UNIT         _DATA_GROUP_
             DATA    000EH     0004H     UNIT         ?DT?PILOTAGE_DRONE_AUTOMATIQUE
                     0012H     000EH                  *** GAP ***
-            BIT     0020H.0   0000H.2   UNIT         _BIT_GROUP_
-            BIT     0020H.2   0000H.1   UNIT         ?BI?PILOTAGE_DRONE_AUTOMATIQUE
-                    0020H.3   0000H.5                *** GAP ***
+            BIT     0020H.0   0000H.3   UNIT         ?BI?PILOTAGE_DRONE_AUTOMATIQUE
+            BIT     0020H.3   0000H.2   UNIT         _BIT_GROUP_
+                    0020H.5   0000H.3                *** GAP ***
             IDATA   0021H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
@@ -36,14 +36,14 @@ LINK MAP OF MODULE:  .\Objects\Pilotage Drone automatique (PILOTAGE_DRONE_AUTOMA
                     0003H     0008H                  *** GAP ***
             CODE    000BH     0003H     ABSOLUTE     
                     000EH     07F2H                  *** GAP ***
-            CODE    0800H     00F6H     UNIT         ?PR?MAIN?PILOTAGE_DRONE_AUTOMATIQUE
-            CODE    08F6H     008CH     UNIT         ?C_C51STARTUP
-            CODE    0982H     0064H     UNIT         ?PR?_JOYSTICKDIRECTION?PILOTAGE_DRONE_AUTOMATIQUE
-            CODE    09E6H     001DH     UNIT         ?PR?TIMERINIT?PILOTAGE_DRONE_AUTOMATIQUE
-            CODE    0A03H     000FH     UNIT         ?C_INITSEG
-            CODE    0A12H     000DH     UNIT         ?PR?CLOCKINIT?PILOTAGE_DRONE_AUTOMATIQUE
-            CODE    0A1FH     0007H     UNIT         ?PR?PORTINIT?PILOTAGE_DRONE_AUTOMATIQUE
-            CODE    0A26H     0003H     UNIT         ?PR?FONCTIONDINTERRUPTIONDUTIMER?PILOTAGE_DRONE_AUTOMATIQUE
+            CODE    0800H     0123H     UNIT         ?PR?MAIN?PILOTAGE_DRONE_AUTOMATIQUE
+            CODE    0923H     0094H     UNIT         ?PR?_JOYSTICK?PILOTAGE_DRONE_AUTOMATIQUE
+            CODE    09B7H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0A43H     001DH     UNIT         ?PR?TIMERINIT?PILOTAGE_DRONE_AUTOMATIQUE
+            CODE    0A60H     0013H     UNIT         ?C_INITSEG
+            CODE    0A73H     000DH     UNIT         ?PR?CLOCKINIT?PILOTAGE_DRONE_AUTOMATIQUE
+            CODE    0A80H     0007H     UNIT         ?PR?PORTINIT?PILOTAGE_DRONE_AUTOMATIQUE
+            CODE    0A87H     0003H     UNIT         ?PR?FONCTIONDINTERRUPTIONDUTIMER?PILOTAGE_DRONE_AUTOMATIQUE
 
 
 
@@ -57,14 +57,14 @@ SEGMENT                                             BIT_GROUP          DATA_GROU
   +--> ?PR?MAIN?PILOTAGE_DRONE_AUTOMATIQUE
   +--> ?C_INITSEG
 
-?PR?MAIN?PILOTAGE_DRONE_AUTOMATIQUE              0020H.0  0000H.2    0008H    0006H
+?PR?MAIN?PILOTAGE_DRONE_AUTOMATIQUE              0020H.3  0000H.2    0008H    0006H
   +--> ?PR?CLOCKINIT?PILOTAGE_DRONE_AUTOMATIQUE
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/29/2020  19:22:33  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/06/2020  20:38:58  PAGE 2
 
 
   +--> ?PR?PORTINIT?PILOTAGE_DRONE_AUTOMATIQUE
   +--> ?PR?TIMERINIT?PILOTAGE_DRONE_AUTOMATIQUE
-  +--> ?PR?_JOYSTICKDIRECTION?PILOTAGE_DRONE...
+  +--> ?PR?_JOYSTICK?PILOTAGE_DRONE_AUTOMATIQUE
 
 
 
@@ -76,8 +76,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\Pilotage Drone automatique (PILOTAGE_DRONE_AU
   -------         MODULE        PILOTAGE_DRONE_AUTOMATIQUE
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
-  C:0A12H         PUBLIC        ClockInit
+  C:0A73H         PUBLIC        ClockInit
   B:00A8H.7       PUBLIC        EA
+  B:0020H.0       PUBLIC        joystick_Droite_Click
   D:00E8H         PUBLIC        ADC0CN
   D:00A4H         PUBLIC        P0MDOUT
   D:00A8H         PUBLIC        IE
@@ -85,9 +86,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\Pilotage Drone automatique (PILOTAGE_DRONE_AU
   D:00D8H         PUBLIC        PCA0CN
   D:000EH         PUBLIC        Joystick_Gauche_Horizontal
   D:00B8H         PUBLIC        IP
-  C:09E6H         PUBLIC        TimerInit
+  C:0A43H         PUBLIC        TimerInit
   D:00E2H         PUBLIC        XBR1
-  B:0020H.2       PUBLIC        flagTimer
+  B:0020H.1       PUBLIC        flagTimer
   D:00C0H         PUBLIC        SMB0CN
   D:00C0H         PUBLIC        SMB1CN
   C:0800H         PUBLIC        main
@@ -98,7 +99,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\Pilotage Drone automatique (PILOTAGE_DRONE_AU
   D:0088H         PUBLIC        TCON
   D:00C8H         PUBLIC        TMR2CN
   D:00C8H         PUBLIC        TMR5CN
-  C:0A1FH         PUBLIC        PortInit
+  C:0A80H         PUBLIC        PortInit
   D:00A9H         PUBLIC        CLKSEL
   D:0011H         PUBLIC        Joystick_Droite_Vertical
   D:00B2H         PUBLIC        OSCICN
@@ -107,202 +108,228 @@ SYMBOL TABLE OF MODULE:  .\Objects\Pilotage Drone automatique (PILOTAGE_DRONE_AU
   B:0088H.5       PUBLIC        TF0
   D:008CH         PUBLIC        TH0
   D:008AH         PUBLIC        TL0
+  C:0923H         PUBLIC        _Joystick
   B:0088H.4       PUBLIC        TR0
   D:0098H         PUBLIC        SCON0
-  C:0A26H         PUBLIC        FonctionDInterruptionDuTimer
+  C:0A87H         PUBLIC        FonctionDInterruptionDuTimer
   D:008EH         PUBLIC        CKCON
+  B:0020H.2       PUBLIC        joystick_Gauche_Click
   D:00B6H         PUBLIC        FLSCL
   D:00D0H         PUBLIC        PSW
-  C:0982H         PUBLIC        _JoystickDirection
   -------         PROC          MAIN
   -------         DO            
   D:0008H         SYMBOL        periodePWM
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/06/2020  20:38:58  PAGE 3
+
+
   D:0009H         SYMBOL        compteurSeconde
   D:000BH         SYMBOL        compteurMiliSeconde
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/29/2020  19:22:33  PAGE 3
-
-
   D:000CH         SYMBOL        compteurAction
-  B:0020H.0       SYMBOL        run
-  B:0020H.1       SYMBOL        flagSeconde
+  B:0020H.3       SYMBOL        run
+  B:0020H.4       SYMBOL        flagSeconde
   D:000DH         SYMBOL        pwm
   -------         ENDDO         
-  C:0800H         LINE#         45
-  C:0800H         LINE#         46
-  C:0800H         LINE#         48
-  C:0803H         LINE#         49
-  C:0807H         LINE#         50
-  C:0809H         LINE#         51
-  C:080BH         LINE#         61
-  C:080DH         LINE#         64
-  C:0810H         LINE#         65
-  C:0813H         LINE#         66
-  C:0816H         LINE#         67
-  C:0819H         LINE#         68
-  C:081BH         LINE#         71
-  C:0821H         LINE#         72
-  C:0821H         LINE#         73
-  C:0824H         LINE#         74
-  C:0824H         LINE#         75
-  C:0826H         LINE#         76
-  C:0849H         LINE#         77
-  C:0849H         LINE#         79
-  C:084CH         LINE#         80
-  C:084EH         LINE#         81
-  C:0852H         LINE#         82
-  C:0854H         LINE#         83
-  C:0858H         LINE#         84
-  C:085AH         LINE#         85
-  C:085EH         LINE#         86
-  C:0860H         LINE#         87
-  C:0864H         LINE#         88
-  C:0866H         LINE#         89
-  C:086DH         LINE#         90
-  C:086FH         LINE#         91
-  C:0872H         LINE#         92
-  C:0872H         LINE#         103
-  C:0872H         LINE#         104
-  C:0874H         LINE#         106
-  C:0874H         LINE#         108
-  C:0877H         LINE#         109
-  C:0877H         LINE#         112
-  C:0882H         LINE#         113
-  C:0882H         LINE#         114
-  C:0884H         LINE#         115
-  C:0886H         LINE#         117
-  C:0886H         LINE#         118
-  C:0889H         LINE#         119
-  C:0891H         LINE#         120
-  C:0891H         LINE#         122
-  C:089CH         LINE#         123
-  C:089CH         LINE#         124
-  C:08A1H         LINE#         125
-  C:08A3H         LINE#         126
-  C:08A3H         LINE#         130
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/29/2020  19:22:33  PAGE 4
+  C:0800H         LINE#         50
+  C:0800H         LINE#         51
+  C:0800H         LINE#         53
+  C:0803H         LINE#         54
+  C:0807H         LINE#         55
+  C:0809H         LINE#         56
+  C:080BH         LINE#         66
+  C:080DH         LINE#         71
+  C:0810H         LINE#         72
+  C:0813H         LINE#         73
+  C:0816H         LINE#         74
+  C:0819H         LINE#         75
+  C:081BH         LINE#         78
+  C:0821H         LINE#         79
+  C:0821H         LINE#         80
+  C:0824H         LINE#         81
+  C:0824H         LINE#         82
+  C:0826H         LINE#         83
+  C:084FH         LINE#         84
+  C:084FH         LINE#         86
+  C:0852H         LINE#         87
+  C:0854H         LINE#         88
+  C:0858H         LINE#         89
+  C:085AH         LINE#         90
+  C:085EH         LINE#         91
+  C:0860H         LINE#         92
+  C:0864H         LINE#         93
+  C:0866H         LINE#         94
+  C:086AH         LINE#         95
+  C:086CH         LINE#         96
+  C:0870H         LINE#         97
+  C:0872H         LINE#         98
+  C:0876H         LINE#         99
+  C:0878H         LINE#         100
+  C:087FH         LINE#         101
+  C:0881H         LINE#         102
+  C:0884H         LINE#         103
+  C:0884H         LINE#         118
+  C:0884H         LINE#         119
+  C:0886H         LINE#         121
+  C:0886H         LINE#         123
+  C:0889H         LINE#         124
+  C:0889H         LINE#         127
+  C:0894H         LINE#         128
+  C:0894H         LINE#         129
+  C:0896H         LINE#         130
+  C:0898H         LINE#         132
+  C:0898H         LINE#         133
+  C:089BH         LINE#         134
+  C:08A3H         LINE#         135
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/06/2020  20:38:58  PAGE 4
 
 
-  C:08A5H         LINE#         131
-  C:08B0H         LINE#         132
-  C:08B0H         LINE#         133
-  C:08B3H         LINE#         134
-  C:08B3H         LINE#         137
-  C:08BAH         LINE#         138
-  C:08BAH         LINE#         139
-  C:08BDH         LINE#         140
-  C:08BFH         LINE#         142
-  C:08BFH         LINE#         143
-  C:08C2H         LINE#         144
-  C:08C2H         LINE#         146
-  C:08C9H         LINE#         147
-  C:08C9H         LINE#         148
-  C:08CCH         LINE#         149
-  C:08CEH         LINE#         151
-  C:08CEH         LINE#         152
-  C:08D1H         LINE#         153
-  C:08D1H         LINE#         155
-  C:08D8H         LINE#         156
-  C:08D8H         LINE#         157
-  C:08DBH         LINE#         158
-  C:08DDH         LINE#         160
-  C:08DDH         LINE#         161
-  C:08E0H         LINE#         162
-  C:08E0H         LINE#         164
-  C:08E7H         LINE#         165
-  C:08E7H         LINE#         166
-  C:08EAH         LINE#         167
-  C:08ECH         LINE#         169
-  C:08ECH         LINE#         170
-  C:08EFH         LINE#         171
-  C:08EFH         LINE#         174
-  C:08F2H         LINE#         176
-  C:08F2H         LINE#         178
-  C:08F5H         LINE#         179
+  C:08A3H         LINE#         137
+  C:08AEH         LINE#         138
+  C:08AEH         LINE#         139
+  C:08B3H         LINE#         140
+  C:08B5H         LINE#         141
+  C:08B5H         LINE#         145
+  C:08B7H         LINE#         146
+  C:08C2H         LINE#         147
+  C:08C2H         LINE#         148
+  C:08C5H         LINE#         149
+  C:08C5H         LINE#         152
+  C:08CCH         LINE#         153
+  C:08CCH         LINE#         154
+  C:08CFH         LINE#         155
+  C:08D1H         LINE#         157
+  C:08D1H         LINE#         158
+  C:08D4H         LINE#         159
+  C:08D4H         LINE#         161
+  C:08DBH         LINE#         162
+  C:08DBH         LINE#         163
+  C:08DEH         LINE#         164
+  C:08E0H         LINE#         166
+  C:08E0H         LINE#         167
+  C:08E3H         LINE#         168
+  C:08E3H         LINE#         170
+  C:08EAH         LINE#         171
+  C:08EAH         LINE#         172
+  C:08EDH         LINE#         173
+  C:08EFH         LINE#         175
+  C:08EFH         LINE#         176
+  C:08F2H         LINE#         177
+  C:08F2H         LINE#         179
+  C:08F9H         LINE#         180
+  C:08F9H         LINE#         181
+  C:08FCH         LINE#         182
+  C:08FEH         LINE#         184
+  C:08FEH         LINE#         185
+  C:0901H         LINE#         186
+  C:0901H         LINE#         190
+  C:0906H         LINE#         191
+  C:0906H         LINE#         192
+  C:0908H         LINE#         193
+  C:090AH         LINE#         195
+  C:090AH         LINE#         196
+  C:0910H         LINE#         197
+  C:0910H         LINE#         198
+  C:0915H         LINE#         199
+  C:0915H         LINE#         200
+  C:0917H         LINE#         201
+  C:0919H         LINE#         203
+  C:0919H         LINE#         204
+  C:091FH         LINE#         205
+  C:091FH         LINE#         207
+  C:091FH         LINE#         209
+  C:0922H         LINE#         210
   -------         ENDPROC       MAIN
-  -------         PROC          _JOYSTICKDIRECTION
+  -------         PROC          _JOYSTICK
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/06/2020  20:38:58  PAGE 5
+
+
   D:0007H         SYMBOL        gauche
   D:0005H         SYMBOL        droite
-  C:0982H         LINE#         191
-  C:0982H         LINE#         192
-  C:0982H         LINE#         193
-  C:0996H         LINE#         194
-  C:0996H         LINE#         195
-  C:0999H         LINE#         196
-  C:099BH         LINE#         197
-  C:099BH         LINE#         198
-  C:099DH         LINE#         199
-  C:09A0H         LINE#         200
-  C:09A2H         LINE#         201
-  C:09A5H         LINE#         202
-  C:09A7H         LINE#         203
-  C:09ADH         LINE#         204
-  C:09AFH         LINE#         205
-  C:09B5H         LINE#         206
-  C:09B5H         LINE#         207
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/29/2020  19:22:33  PAGE 5
-
-
-  C:09B5H         LINE#         208
-  C:09C9H         LINE#         209
-  C:09C9H         LINE#         210
-  C:09CCH         LINE#         211
-  C:09CDH         LINE#         212
-  C:09D0H         LINE#         213
-  C:09D1H         LINE#         214
-  C:09D4H         LINE#         215
-  C:09D5H         LINE#         216
-  C:09D8H         LINE#         217
-  C:09D9H         LINE#         218
-  C:09DEH         LINE#         219
-  C:09DFH         LINE#         220
-  C:09E5H         LINE#         221
-  C:09E5H         LINE#         222
-  C:09E5H         LINE#         223
-  -------         ENDPROC       _JOYSTICKDIRECTION
+  C:0923H         LINE#         222
+  C:0923H         LINE#         223
+  C:0923H         LINE#         224
+  C:0948H         LINE#         225
+  C:0948H         LINE#         226
+  C:094BH         LINE#         227
+  C:094DH         LINE#         228
+  C:094DH         LINE#         229
+  C:094FH         LINE#         230
+  C:0952H         LINE#         231
+  C:0954H         LINE#         232
+  C:0957H         LINE#         233
+  C:0959H         LINE#         234
+  C:095FH         LINE#         235
+  C:0961H         LINE#         236
+  C:0967H         LINE#         237
+  C:0969H         LINE#         238
+  C:096BH         LINE#         239
+  C:096DH         LINE#         240
+  C:096FH         LINE#         241
+  C:096FH         LINE#         242
+  C:096FH         LINE#         243
+  C:0994H         LINE#         244
+  C:0994H         LINE#         245
+  C:0997H         LINE#         246
+  C:0998H         LINE#         247
+  C:099BH         LINE#         248
+  C:099CH         LINE#         249
+  C:099FH         LINE#         250
+  C:09A0H         LINE#         251
+  C:09A3H         LINE#         252
+  C:09A4H         LINE#         253
+  C:09A9H         LINE#         254
+  C:09AAH         LINE#         255
+  C:09B0H         LINE#         256
+  C:09B1H         LINE#         257
+  C:09B3H         LINE#         258
+  C:09B4H         LINE#         259
+  C:09B6H         LINE#         260
+  C:09B6H         LINE#         261
+  C:09B6H         LINE#         262
+  -------         ENDPROC       _JOYSTICK
   -------         PROC          FONCTIONDINTERRUPTIONDUTIMER
-  C:0A26H         LINE#         232
-  C:0A26H         LINE#         234
-  C:0A28H         LINE#         235
+  C:0A87H         LINE#         271
+  C:0A87H         LINE#         273
+  C:0A89H         LINE#         274
   -------         ENDPROC       FONCTIONDINTERRUPTIONDUTIMER
   -------         PROC          TIMERINIT
-  C:09E6H         LINE#         246
-  C:09E6H         LINE#         247
-  C:09E6H         LINE#         248
-  C:09E8H         LINE#         249
-  C:09EAH         LINE#         251
-  C:09EDH         LINE#         262
-  C:09F0H         LINE#         264
-  C:09F3H         LINE#         271
-  C:09F6H         LINE#         273
-  C:09FCH         LINE#         275
-  C:09FEH         LINE#         276
-  C:0A00H         LINE#         277
-  C:0A02H         LINE#         278
+  C:0A43H         LINE#         285
+  C:0A43H         LINE#         286
+  C:0A43H         LINE#         287
+  C:0A45H         LINE#         288
+  C:0A47H         LINE#         290
+  C:0A4AH         LINE#         301
+  C:0A4DH         LINE#         303
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/06/2020  20:38:58  PAGE 6
+
+
+  C:0A50H         LINE#         310
+  C:0A53H         LINE#         312
+  C:0A59H         LINE#         314
+  C:0A5BH         LINE#         315
+  C:0A5DH         LINE#         316
+  C:0A5FH         LINE#         317
   -------         ENDPROC       TIMERINIT
   -------         PROC          CLOCKINIT
-  C:0A12H         LINE#         290
-  C:0A12H         LINE#         291
-  C:0A12H         LINE#         303
-  C:0A15H         LINE#         320
-  C:0A18H         LINE#         334
-  C:0A1BH         LINE#         336
-  C:0A1EH         LINE#         338
+  C:0A73H         LINE#         329
+  C:0A73H         LINE#         330
+  C:0A73H         LINE#         342
+  C:0A76H         LINE#         359
+  C:0A79H         LINE#         373
+  C:0A7CH         LINE#         375
+  C:0A7FH         LINE#         377
   -------         ENDPROC       CLOCKINIT
   -------         PROC          PORTINIT
-  C:0A1FH         LINE#         347
-  C:0A1FH         LINE#         348
-  C:0A1FH         LINE#         349
-  C:0A22H         LINE#         350
-  C:0A25H         LINE#         352
+  C:0A80H         LINE#         386
+  C:0A80H         LINE#         387
+  C:0A80H         LINE#         388
+  C:0A83H         LINE#         389
+  C:0A86H         LINE#         391
   -------         ENDPROC       PORTINIT
   -------         ENDMOD        PILOTAGE_DRONE_AUTOMATIQUE
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 019FH BYTE (20%) *
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/29/2020  19:22:33  PAGE 6
-
-
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0200H BYTE (25%) *
 ******************************************************************************
 
-Program Size: data=19.3 xdata=0 code=559
+Program Size: data=19.5 xdata=0 code=656
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
