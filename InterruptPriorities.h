@@ -1,3 +1,6 @@
+#ifndef _INTERRUPTPRIORITIES_H_
+#define _INTERRUPTPRIORITIES_H_
+
 //-----------------------------------------------------------------------------
 // Interrupt Priorities
 //-----------------------------------------------------------------------------
@@ -22,3 +25,5 @@
 #define INTERRUPT_SMBUS1           18  // SMBus1 Interface
 #define INTERRUPT_TIMER4           19  // Timer4 Overflow
 #define INTERRUPT_TIMER5           20  // Timer5 Overflow
+
+#endif //_INTERRUPTPRIORITIES_H_
